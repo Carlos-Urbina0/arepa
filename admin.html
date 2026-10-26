@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Arepa Express | Administración</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+</head>
+
+<script>
+
+    if (
+        sessionStorage.getItem(
+            "arepaExpressAdmin"
+        ) !== "true"
+    ) {
+
+        window.location.href =
+            "login.html";
+
+    }
+    
+
+</script>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="admin-header">
+
+        <div class="logo">
+
+            <span>🫓</span>
+
+            <div>
+                <strong>AREPA EXPRESS</strong>
+                <small>Panel administrativo</small>
+            </div>
+
+        </div>
+
+        <a
+            href="index.html"
+            class="view-site"
+        >
+            👀 Ver tienda
+        </a>
+        
+        <button
+    class="logout-button"
+    onclick="logoutAdmin()"
+>
+    🚪 Cerrar sesión
+</button>
+
+    </header>
+
+
+    <!-- ================= CONTENIDO ================= -->
+
+    <main class="admin-container">
+
+        <div class="admin-title">
+
+            <div>
+
+                <span class="tag">
+                    🇻🇪 ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Gestión del menú
+                </h1>
+
+            </div>
+
+            <button
+                class="add-product-button"
+                id="addProductButton"
+            >
+                + Agregar producto
+            </button>
+
+            <button type="button" id="addCategoryButton">
+                + Agregar categoría
+            </button>
+
+
+        </div>
+
+        <!-- ESTADÍSTICAS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <span>🫓</span>
+
+                <div>
+                    <strong id="totalProducts">
+                        0
+                    </strong>
+
+                    <small>
+                        Productos
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>🟢</span>
+
+                <div>
+                    <strong id="availableProducts">
+                        0
+                    </strong>
+
+                    <small>
+                        Disponibles
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>🔴</span>
+
+                <div>
+                    <strong id="unavailableProducts">
+                        0
+                    </strong>
+
+                    <small>
+                        Agotados
+                    </small>
+                </div>
+
+            </div>
+
+        </section>
+        
+        
+        <!-- CONFIGURACIÓN DE LA CUENTA -->
+        <section class="products-admin" style="margin-bottom: 30px;">
+            <div class="section-header">
+                <h2>⚙️ Configuración de la cuenta</h2>
+            </div>
+
+            <form id="adminSettingsForm" style="display:grid; gap:15px; max-width:600px;">
+                <label for="settingAdminName">Nombre del administrador</label>
+                <input
+                    type="text"
+                    id="settingAdminName"
+                    required
+                    autocomplete="username"
+                    placeholder="Nombre de administrador"
+                >
+
+                <label for="settingAdminPassword">Nueva contraseña</label>
+                <input
+                    type="password"
+                    id="settingAdminPassword"
+                    required
+                    minlength="4"
+                    autocomplete="new-password"
+                    placeholder="Escribe la nueva contraseña"
+                >
+
+                <label for="settingWhatsApp">Número de WhatsApp</label>
+                <input
+                    type="tel"
+                    id="settingWhatsApp"
+                    required
+                    placeholder="+55 62 99999-9999"
+                >
+
+                
+<label for="settingInstagram">Enlace de Instagram</label>
+<input
+    type="url"
+    id="settingInstagram"
+    placeholder="https://www.instagram.com/tu-cuenta"
+>
+
+<label for="settingFacebook">Enlace de Facebook</label>
+<input
+    type="url"
+    id="settingFacebook"
+    placeholder="https://www.facebook.com/tu-cuenta"
+>
+
+<label for="settingTikTok">Enlace de TikTok</label>
+<input
+    type="url"
+    id="settingTikTok"
+    placeholder="https://www.tiktok.com/@tu-cuenta"
+>
+
+<label for="settingEmail">Correo electrónico</label>
+<input
+    type="email"
+    id="settingEmail"
+    placeholder="tucorreo@gmail.com"
+>
+
+
+
+                <button type="submit" class="add-product-button">
+                    💾 Guardar configuración
+                </button>
+
+                <p id="adminSettingsMessage" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+
+
+        <!-- ================= PRODUCTOS ================= -->
+
+        <section class="products-admin">
+
+            <div class="section-header">
+
+                <h2>
+                    Productos
+                </h2>
+
+                <select id="categoryFilter">
+
+                    <option value="todos">
+                        Todas las categorías
+                    </option>
+
+                    <option value="arepas">
+                        🫓 Arepas
+                    </option>
+
+                    <option value="combos">
+                        🍽️ Combos
+                    </option>
+
+                    <option value="bebidas">
+                        🥤 Bebidas
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="admin-products-grid"
+                id="adminProductsGrid"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= MODAL ================= -->
+
+    <div
+        class="admin-modal"
+        id="productModal"
+    >
+
+        <div class="modal-box">
+
+            <button
+                class="close-modal"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-title">
+
+                <span>🫓</span>
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        Agregar producto
+                    </h2>
+
+                    <p>
+                        Completa la información del producto.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="productForm">
+
+                <input
+                    type="hidden"
+                    id="productId"
+                >
+
+
+                <label>
+                    Nombre del producto
+                </label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="Ej: Reina Pepiada"
+                    required
+                >
+
+
+                <label>
+                    Descripción
+                </label>
+
+                <textarea
+                    id="productDescription"
+                    placeholder="Describe los ingredientes..."
+                    required
+                ></textarea>
+
+
+                <div class="form-row">
+
+                    <div>
+
+                        <label>
+                            Precio
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            step="0.01"
+                            min="0"
+                            placeholder="8.50"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Categoría
+                        </label>
+
+                        <select
+                            id="productCategory"
+                            required
+                        >
+
+                            <option value="arepas">
+                                🫓 Arepas
+                            </option>
+
+                            <option value="combos">
+                                🍽️ Combos
+                            </option>
+
+                            <option value="bebidas">
+                                🥤 Bebidas
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label>
+                    Imagen
+                </label>
+
+                <div class="form-group">
+
+    <label for="productImageFile">
+        📷 Foto del producto
+    </label>
+
+    <input
+        type="file"
+        id="productImageFile"
+        accept="image/*"
+    >
+
+</div>
+
+<div class="image-preview-container">
+
+    <h4>Vista previa</h4>
+
+    <div
+        id="imagePreview"
+        class="image-preview"
+    >
+        <span>
+            🖼️ Selecciona una foto
+        </span>
+    </div>
+
+</div>
+
+                <input
+                    type="text"
+                    id="productImage"
+                    placeholder="img/reina-pepiada.jpg"
+                >
+
+                <small class="input-help">
+                    Ejemplo: img/reina-pepiada.jpg
+                </small>
+
+
+                <label class="availability">
+
+                    <input
+                        type="checkbox"
+                        id="productAvailable"
+                        checked
+                    >
+
+                    <span>
+                        Producto disponible
+                    </span>
+
+                </label>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        id="cancelButton"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-button"
+                    >
+                        💾 Guardar producto
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    
+<div id="categoryModal" class="category-modal">
+    <div class="category-box">
+        <h2>Agregar categoría</h2>
+
+        <form id="categoryForm">
+            <label for="newCategoryName">
+                Nombre de la categoría
+            </label>
+
+            <input
+                type="text"
+                id="newCategoryName"
+                placeholder="Ej.: Postres"
+                required
+            >
+
+            <label for="newCategoryEmoji">
+                Emoji (opcional)
+            </label>
+
+            <input
+                type="text"
+                id="newCategoryEmoji"
+                placeholder="Ej.: 🍰"
+            >
+
+            <div class="category-buttons">
+                <button type="submit">
+                    Guardar categoría
+                </button>
+
+                <button type="button" id="cancelCategoryButton">
+                    Cancelar
+                </button>
+            </div>
+
+            <p id="categoryFormMessage"></p>
+        </form>
+    </div>
+</div>
+
+
+<!-- VENTANA PARA CONFIRMAR ELIMINACIÓN -->
+<div id="deleteProductModal" class="admin-modal">
+    <div class="modal-box delete-confirm-box">
+        <div class="delete-icon">🗑️</div>
+
+        <h2>¿Estás seguro?</h2>
+
+        <p id="deleteProductMessage">
+            ¿Deseas eliminar este producto?
+        </p>
+
+        <form id="deleteProductForm">
+            <label for="deleteProductPassword">
+                Contraseña de administrador
+            </label>
+
+            <input
+                type="password"
+                id="deleteProductPassword"
+                placeholder="Introduce tu contraseña"
+                autocomplete="current-password"
+                required
+            >
+
+            <p id="deleteProductError" role="alert"></p>
+
+            <div class="form-buttons">
+                <button
+                    type="button"
+                    class="cancel-button"
+                    id="cancelDeleteProduct"
+                >
+                    Cancelar
+                </button>
+
+                <button type="submit" class="confirm-delete-button">
+                    🗑️ Eliminar producto
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <script src="admin.js"></script>
+
+<script>
+
+function logoutAdmin() {
+
+    sessionStorage.removeItem(
+        "arepaExpressAdmin"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+</script>
+
+</body>
+
+</html>

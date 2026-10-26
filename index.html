@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arepa Express - Sabor venezolano en cada mordisco">
+    <title>Arepa Express | Sabor Venezolano</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<!-- AVISO INICIAL -->
+<div id="termsOverlay" class="terms-overlay">
+
+    <div class="terms-modal">
+
+        <div class="terms-icon">🫓</div>
+
+        <h2>¡Bienvenido a Arepa Express! 🇻🇪</h2>
+
+        <p>
+            Antes de entrar al menú debes leer y aceptar
+            nuestras condiciones.
+        </p>
+
+        <div class="business-hours">
+            <h3>🕐 Horario</h3>
+            <p>Todos los días: <strong>14:00 - 23:00</strong></p>
+        </div>
+
+        <div class="delivery-warning">
+            <h3>🛵 Importante sobre el delivery</h3>
+
+            <p>
+                En caso de lluvia fuerte, inundaciones,
+                calles bloqueadas o condiciones peligrosas,
+                el tiempo de entrega puede aumentar.
+            </p>
+
+            <p>
+                La seguridad del repartidor es prioritaria.
+            </p>
+        </div>
+
+        <div class="terms-box">
+            <h3>📋 Términos</h3>
+
+            <p>
+                Debes aceptar estas condiciones para
+                continuar y realizar tu pedido.
+            </p>
+        </div>
+
+        <input
+    type="checkbox"
+    id="acceptTerms"
+    onchange="activarEntrada()"
+>
+
+<button
+    type="button"
+    id="enterMenuButton"
+    disabled
+    onclick="entrarAlMenu()"
+>
+    Entrar al menú →
+</button>
+
+<button
+    type="button"
+    id="rejectTermsButton"
+    onclick="noAceptar()"
+>
+    No acepto
+</button>
+
+    </div>
+
+</div>
+
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+
+        <div class="flag-stripe">
+            <span class="yellow"></span>
+            <span class="blue"></span>
+            <span class="red"></span>
+        </div>
+
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <div class="logo-arepa">🫓</div>
+                <div>
+                    <span class="logo-main">AREPA</span>
+                    <span class="logo-sub">EXPRESS</span>
+                </div>
+            </a>
+
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#menu">Menú</a>
+                <a href="#nosotros">Nosotros</a>
+            </div>
+
+            <button class="cart-button" id="openCart">
+                🛒
+                <span>Mi pedido</span>
+                <b id="cartCount">0</b>
+            </button>
+            
+            <!-- MINI MENÚ LATERAL SIN JAVASCRIPT -->
+
+<input type="checkbox" id="activarMenu" class="activar-menu">
+
+<label for="activarMenu" class="boton-menu-css">
+    ☰
+</label>
+
+<label for="activarMenu" class="fondo-menu-css"></label>
+
+<aside class="menu-lateral-css">
+
+    <label for="activarMenu" class="cerrar-menu-css">
+        ✕
+    </label>
+
+    <h2>Menú</h2>
+
+    <a href="admin.html">administrador</a>
+    <a href="#menu">Menú</a>
+    <a href="#nosotros">Nosotros</a>
+
+    <input type="checkbox" id="modoOscuro" class="checkbox-tema">
+
+<label for="modoOscuro" class="boton-tema">
+    <span class="texto-oscuro">🌙 Modo oscuro</span>
+    <span class="texto-claro">☀️ Modo claro</span>
+</label>
+
+</aside>
+
+        </nav>
+
+        <a
+    href="https://wa.me/584121234567"
+    class="header-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp de Arepa Express"
+>
+    💬 WhatsApp
+</a>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+    <main>
+
+        <section class="hero" id="inicio">
+
+            <div class="hero-decoration star-one">★</div>
+            <div class="hero-decoration star-two">★</div>
+
+            <div class="hero-content">
+
+                <span class="hero-tag">🇻🇪 SABOR 100% VENEZOLANO</span>
+
+                <h1>
+                    La arepa que
+                    <span>te alegra el día</span>
+                </h1>
+
+                <p>
+                    Hechas con amor, tradición y ese sabor venezolano
+                    que nos hace sentir como en casa.
+                </p>
+
+                <a href="#menu" class="primary-button">
+                    Ver nuestro menú
+                    <span>→</span>
+                </a>
+
+            </div>
+
+            <div class="hero-arepa">
+                <div class="arepa-shadow"></div>
+                <div class="big-arepa">🫓</div>
+
+                <div class="floating-card">
+                    <span>🔥</span>
+                    <div>
+                        <strong>Recién hechas</strong>
+                        <small>Todos los días</small>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+        <section class="features">
+
+            <div class="feature">
+                <div class="feature-icon"></div>
+                <div>
+                    <strong>100% Venezolanas</strong>
+                    <span>Recetas tradicionales</span>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔥</div>
+                <div>
+                    <strong>Siempre frescas</strong>
+                    <span>Preparadas al momento</span>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <div>
+                    <strong>Entrega rápida</strong>
+                    <span>Directo a tu puerta</span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= MENU ================= -->
+        <section class="menu-section" id="menu">
+
+            <div class="section-heading">
+
+                <span class="section-tag">NUESTRO MENÚ</span>
+
+                <h2>
+                    Elige tu
+                    <span>favorita</span>
+                </h2>
+
+                <p>
+                    Cada arepa tiene su propia historia.
+                    ¿Cuál será la tuya?
+                </p>
+
+            </div>
+
+            <div class="category-buttons">
+                <button class="category active" data-category="todos">
+                    Todas
+                </button>
+
+                <button class="category" data-category="arepas">
+                    🫓 Arepas
+                </button>
+
+                <button class="category" data-category="combos">
+                    🍽️ Combos
+                </button>
+
+                <button class="category" data-category="bebidas">
+                    🥤 Bebidas
+                </button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se generan desde JavaScript -->
+            </div>
+
+        </section>
+
+
+        <!-- ================= NOSOTROS ================= -->
+        <section class="about" id="nosotros">
+
+            <div class="about-image">
+                <div class="about-emoji">🫓</div>
+            </div>
+
+            <div class="about-content">
+
+                <span class="section-tag">NUESTRA HISTORIA</span>
+
+                <h2>
+                    Venezuela en
+                    <span>cada mordisco</span>
+                </h2>
+
+                <p>
+                    En Arepa Express creemos que una buena arepa no es
+                    solamente comida. Es familia, es tradición y es ese
+                    sabor que nos transporta directamente a Venezuela.
+                </p>
+
+                <p>
+                    Preparamos nuestras arepas al momento utilizando
+                    ingredientes seleccionados y recetas inspiradas
+                    en nuestra tierra.
+                </p>
+
+                <div class="venezuela-badge">
+                    🇻🇪
+                    <strong>Hecho con sabor venezolano</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= CART OVERLAY ================= -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- ================= CART ================= -->
+    <aside class="cart" id="cart">
+
+        <div class="cart-header">
+
+            <div>
+                <span class="cart-small">TU PEDIDO</span>
+                <h3>Mi carrito 🛒</h3>
+            </div>
+
+            <button id="closeCart" class="close-cart">×</button>
+
+        </div>
+
+        <div class="cart-items" id="cartItems">
+
+            <div class="empty-cart">
+                <div>🫓</div>
+                <h4>Tu carrito está vacío</h4>
+                <p>¡Agrega una deliciosa arepa!</p>
+            </div>
+
+        </div>
+
+        <div class="cart-footer">
+
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+
+            <div class="delivery-note">
+                🚴 El costo de delivery se calcula al confirmar el pedido.
+            </div>
+
+            <button class="checkout-button" id="checkoutButton">
+                Pedir por WhatsApp
+                <span>→</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= CHECKOUT MODAL ================= -->
+    <div class="modal-overlay" id="checkoutModal">
+
+        <div class="checkout-modal">
+
+            <button class="modal-close" id="closeModal">×</button>
+
+            <div class="modal-header">
+                <span>🇻🇪</span>
+                <h3>Finalizar pedido</h3>
+                <p>Cuéntanos dónde llevar tus arepas</p>
+            </div>
+
+            <form id="checkoutForm">
+
+                <label for="customerName">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Tu nombre"
+                    required
+                >
+
+                <label for="customerPhone">
+                    Teléfono
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="Ej: 0412 123 4567"
+                    required
+                >
+
+                <label for="customerAddress">
+                    Dirección
+                </label>
+
+                <textarea
+                    id="customerAddress"
+                    placeholder="Dirección de entrega"
+                    rows="3"
+                    required
+                ></textarea>
+
+                <label for="paymentMethod">
+                    Método de pago
+                </label>
+
+                <select id="paymentMethod" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Efectivo">💵 Efectivo</option>
+                    <option value="Transferencia">🏦 Transferencia</option>
+                    <option value="Pago móvil">📱 Pago móvil</option>
+                </select>
+
+                <div class="checkout-total">
+                    <span>Total del pedido</span>
+                    <strong id="modalTotal">$0.00</strong>
+                </div>
+
+                <button type="submit" class="confirm-button">
+                    Confirmar pedido por WhatsApp
+                    <span>✓</span>
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+
+    <div class="footer-logo">
+        🫓 <strong>AREPA EXPRESS</strong>
+    </div>
+
+    <p>
+        Sabor venezolano que llega directo a tu corazón ❤️🇻🇪
+    </p>
+
+
+    <!-- REDES SOCIALES -->
+    <div class="social-section">
+
+        <h4>¡Síguenos!</h4>
+
+        <div class="social-links">
+
+            <!-- Instagram -->
+            <a
+                href="https://www.instagram.com/arepaexpress"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social instagram"
+                aria-label="Instagram de Arepa Express"
+            >
+                <span>◎</span>
+                <div>
+                    <strong>Instagram</strong>
+                    <small>@arepaexpress</small>
+                </div>
+            </a>
+
+
+            <!-- Facebook -->
+            <a
+                href="https://www.facebook.com/arepaexpress"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social facebook"
+                aria-label="Facebook de Arepa Express"
+            >
+                <span>f</span>
+                <div>
+                    <strong>Facebook</strong>
+                    <small>Arepa Express</small>
+                </div>
+            </a>
+
+
+            <!-- Gmail -->
+            <a
+                href="mailto:arepaexpress@gmail.com"
+                class="social gmail"
+                aria-label="Enviar correo a Arepa Express"
+            >
+                <span>✉</span>
+                <div>
+                    <strong>Email</strong>
+                    <small>arepaexpress@gmail.com</small>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-flag">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <small>
+        © 2026 Arepa Express. Todos los derechos reservados.
+    </small>
+
+</footer>
+    
+
+
+    <script src="script.js"></script>
+
+
+    <!-- ================= MENSAJE DE GRACIAS ================= -->
+
+<div class="thank-you-overlay" id="thankYouOverlay">
+
+    <div class="thank-you-card">
+
+        <div class="thank-you-flag">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="thank-you-arepa">
+            🫓
+        </div>
+
+        <div class="thank-you-emoji">
+            🇻🇪
+        </div>
+
+        <h2>
+            ¡Gracias por tu compra!
+        </h2>
+
+        <p class="thank-you-main">
+            Tu pedido de <strong>Arepa Express</strong>
+            ha sido recibido.
+        </p>
+
+        <p class="thank-you-vzla">
+            ❤️ ¡Disfruta el auténtico
+            <strong>sabor venezolano</strong>! 💛💙❤️
+        </p>
+
+        <div class="thank-you-message">
+            Hecho con cariño, tradición<br>
+            y mucho sabor venezolano.
+        </div>
+
+        <button
+            class="thank-you-button"
+            id="closeThankYou"
+        >
+            ¡Buen provecho! 🫓
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
