@@ -1019,19 +1019,21 @@ document.getElementById("settingEmail").value =
         }
 
         try {
-            localStorage.setItem(
-                ADMIN_SETTINGS_KEY,
-                JSON.stringify({
-                    ...getAdminSettings(),
-                    name: name,
-                    password: password,
-                    whatsapp: whatsapp,
-                    instagram: instagram,
-                    facebook: facebook,
-                    tiktok: tiktok,
-                    email: email
-                })
-            );
+           
+localStorage.setItem(
+    ADMIN_SETTINGS_KEY,
+    JSON.stringify({
+        ...getAdminSettings(),
+        name: name,
+        password: password,
+        whatsapp: whatsapp,
+        instagram: instagram,
+        facebook: facebook,
+        tiktok: tiktok,
+        email: email
+    })
+);
+
 
             message.textContent =
                 "✅ Configuración guardada en este navegador.";

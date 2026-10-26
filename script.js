@@ -10,6 +10,13 @@ const WHATSAPP_NUMBER = (
 ).replace(/\D/g, "");
 
 
+const headerWhatsApp = document.querySelector(".header-whatsapp");
+
+if (headerWhatsApp) {
+    const number = WHATSAPP_NUMBER.replace(/\D/g, "");
+    headerWhatsApp.href = "https://wa.me/" + number;
+}
+
 const savedEmailSettings = JSON.parse(
     localStorage.getItem("arepaExpressAdminSettings") || "{}"
 );
